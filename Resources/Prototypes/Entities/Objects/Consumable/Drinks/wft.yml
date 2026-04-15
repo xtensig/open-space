@@ -1,0 +1,41 @@
+- type: reagent
+  id: pohlepka
+  name: Похлепка
+  parent: BaseAlcohol
+  desc: Выглядит ужасно... но пить можно.
+  physicalDesc: reagent-physical-desc-strong-smelling
+  flavor: pohlepka
+  color: "#3D3C3D"
+  metamorphicSprite:
+    sprite: Objects/Consumable/Drinks/wtf.rsi
+    state: icon
+  metamorphicMaxFillLevels: 4
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+  metabolisms:
+    Digestion:
+      metabolites:
+        Ethanol: 1
+      effects:
+      - !type:SatiateThirst
+        factor: 1.2
+      - !type:HealthChange
+        damage:
+          types:
+            Poison: 0.5
+      - !type:GenericStatusEffect
+        key: SeeingRainbows
+        time: 2
+        type: Add
+
+- type: reaction
+  id: pohlepka
+  reactants:
+    Sake:
+      amount: 2
+    Beer:
+      amount: 1
+    Ethanol:
+      amount: 1
+  products:
+    pohlepka: 4      
