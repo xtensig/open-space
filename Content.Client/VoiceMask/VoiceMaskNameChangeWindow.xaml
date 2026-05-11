@@ -14,5 +14,11 @@
         </BoxContainer>
         <Button Name="ToggleAccentButton" Text="{Loc 'voice-mask-name-change-accent-toggle'}" HorizontalExpand="True" ToggleMode="True" Margin="5"/>
         <Button Name="ToggleButton" Text="{Loc 'voice-mask-name-change-toggle'}" HorizontalExpand="True" ToggleMode="True" Margin="5"/>
+        <!-- OpenSpace edit start -->
+        <BoxContainer Name="TTSContainer" Orientation="Vertical" Margin="5">
+            <Label Text="{Loc 'voice-mask-tts-voice-label'}" />
+            <OptionButton Name="VoiceSelector" HorizontalExpand="True" />
+        </BoxContainer>
+        <!-- OpenSpace edit end -->
     </BoxContainer>
 </controls:FancyWindow>

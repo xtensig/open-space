@@ -1,6 +1,7 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Systems;
 using Content.Server.Power.Components;
+using Content.Shared._OpenSpace.TTS; // OpenSpace
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Radio;
@@ -53,6 +54,13 @@ public sealed partial class RadioSystem : EntitySystem
 
     private void OnIntrinsicReceive(EntityUid uid, IntrinsicRadioReceiverComponent component, ref RadioReceiveEvent args)
     {
+        // OpenSpace edit start
+        if (args.Voice is not null)
+        {
+            var ev = new TTSRadioPlayEvent(args.Message, args.Voice, GetNetEntity(uid), GetNetEntity(args.MessageSource));
+            RaiseLocalEvent(uid, ev);
+        }
+        // OpenSpace edit end
         if (TryComp(uid, out ActorComponent? actor))
             _netMan.ServerSendMessage(args.ChatMsg, actor.PlayerSession.Channel);
     }
@@ -102,6 +110,16 @@ public sealed partial class RadioSystem : EntitySystem
             ("message", content));
 
         // most radios are relayed to chat, so lets parse the chat message beforehand
+        // OpenSpace edit start
+        string? voice = null;
+        if (TryComp<TTSComponent>(messageSource, out var tts) && tts.VoicePrototypeId != null)
+        {
+            var voiceEv = new TransformSpeakerVoiceEvent(messageSource, tts.VoicePrototypeId);
+            RaiseLocalEvent(messageSource, voiceEv);
+            voice = voiceEv.VoiceId;
+        }
+        // OpenSpace edit end
+
         var chat = new ChatMessage(
             ChatChannel.Radio,
             message,
@@ -109,7 +127,7 @@ public sealed partial class RadioSystem : EntitySystem
             NetEntity.Invalid,
             null);
         var chatMsg = new MsgChatMessage { Message = chat };
-        var ev = new RadioReceiveEvent(message, messageSource, channel, radioSource, chatMsg);
+        var ev = new RadioReceiveEvent(message, messageSource, channel, radioSource, chatMsg, voice); // OpenSpace
 
         var sendAttemptEv = new RadioSendAttemptEvent(channel, radioSource);
         RaiseLocalEvent(ref sendAttemptEv);

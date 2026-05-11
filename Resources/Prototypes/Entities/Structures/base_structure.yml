@@ -26,6 +26,8 @@
   - type: Tag
     tags:
       - Structure
+  - type: TTS # OpenSpace
+    voice: fact_core # OpenSpace
 
 - type: entity
   # This means that it's not anchored on spawn.

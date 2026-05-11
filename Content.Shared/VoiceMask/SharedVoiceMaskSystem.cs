@@ -17,15 +17,19 @@ public sealed class VoiceMaskBuiState : BoundUserInterfaceState
     public readonly bool Active;
     public readonly bool AccentHide;
     public readonly LocId TitleText;
+    // OpenSpace edit start
+    public readonly string? Voice;
 
-    public VoiceMaskBuiState(string name, string? verb, bool active, bool accentHide, LocId titleText)
+    public VoiceMaskBuiState(string name, string? verb, bool active, bool accentHide, LocId titleText, string? voice = null)
     {
         Name = name;
         Verb = verb;
         Active = active;
         AccentHide = accentHide;
         TitleText = titleText;
+        Voice = voice;
     }
+    // OpenSpace edit end
 }
 
 [Serializable, NetSerializable]
@@ -68,15 +72,31 @@ public sealed class VoiceMaskAccentToggleMessage : BoundUserInterfaceMessage;
 /// <summary>
 ///  Fired when a voice mask is turned on.
 /// </summary>
-/// <param name=="Mask">The voice mask that was turned on</param> 
-/// <param name=="Source">The entity that owns the voice mask</param> 
-/// <param name=="Active">The new value of the voice mask</param> 
+/// <param name=="Mask">The voice mask that was turned on</param>
+/// <param name=="Source">The entity that owns the voice mask</param>
+/// <param name=="Active">The new value of the voice mask</param>
 public sealed class VoiceMaskToggledEvent(EntityUid mask, EntityUid source, bool active) : IInventoryRelayEvent
 {
     public EntityUid Mask = mask;
     public EntityUid Source = source;
-    
+
     public bool Active = active;
 
     SlotFlags IInventoryRelayEvent.TargetSlots => SlotFlags.WITHOUT_POCKET;
 }
+
+// OpenSpace edit start
+/// <summary>
+///     Change the TTS voice prototype to override, or null to use the entity's own voice.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class VoiceMaskChangeVoiceMessage : BoundUserInterfaceMessage
+{
+    public readonly string? Voice;
+
+    public VoiceMaskChangeVoiceMessage(string? voice)
+    {
+        Voice = voice;
+    }
+}
+// OpenSpace edit end

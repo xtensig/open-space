@@ -81,6 +81,8 @@
     - NamesRevenantAdjective
     - NamesRevenantTheme
     nameFormat: name-format-revenant
+  - type: TTS # OpenSpace
+    voice: hermaeus_mora # OpenSpace
   - type: Speech
     speechVerb: Ghost
   - type: Reactive

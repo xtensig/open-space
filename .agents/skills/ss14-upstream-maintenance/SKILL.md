@@ -18,7 +18,7 @@ Use this skill whenever a change touches inherited upstream code or may introduc
 7. Treat `RobustToolbox/` as off-limits unless the task explicitly requires engine work and no content-side path will solve it.
 8. Mirror existing folder paths when adding fork-side extensions.
 9. Prefer reusable extensions and public APIs over one-off branches, special cases, or hardcoded fork behavior.
-10. Mark OpenSpace-specific blocks in files outside `_OpenSpace` with `open-space edit start` / `open-space edit end`.
+10. Mark OpenSpace-specific blocks in files outside `_OpenSpace` with `OpenSpace Edit Start` / `OpenSpace Edit End`.
 
 ## Reference Map
 

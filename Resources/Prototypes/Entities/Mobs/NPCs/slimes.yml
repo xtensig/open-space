@@ -103,6 +103,8 @@
     successChance: 0.5
     interactSuccessString: petting-success-slimes
     interactFailureString: petting-failure-generic
+  - type: TTS # OpenSpace
+    voice: tracer # OpenSpace
   - type: Speech
     speechVerb: Slime
     speechSounds: Slime

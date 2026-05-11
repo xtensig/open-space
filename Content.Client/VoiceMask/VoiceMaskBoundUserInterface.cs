@@ -28,6 +28,7 @@ public sealed partial class VoiceMaskBoundUserInterface : BoundUserInterface
         _window.OnVerbChange += verb => SendMessage(new VoiceMaskChangeVerbMessage(verb));
         _window.OnToggle += OnToggle;
         _window.OnAccentToggle += OnAccentToggle;
+        _window.OnVoiceChange += voice => SendMessage(new VoiceMaskChangeVoiceMessage(voice)); // OpenSpace
     }
 
     private void OnNameSelected(string name)
@@ -53,6 +54,7 @@ public sealed partial class VoiceMaskBoundUserInterface : BoundUserInterface
         }
 
         _window.UpdateState(cast.Name, cast.Verb, cast.Active, cast.AccentHide, cast.TitleText);
+        _window.SelectVoice(cast.Voice); // OpenSpace
     }
 
     protected override void Dispose(bool disposing)

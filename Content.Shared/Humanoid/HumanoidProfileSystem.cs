@@ -1,3 +1,4 @@
+using Content.Shared._OpenSpace.TTS; // OpenSpace
 using Content.Shared.Examine;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.IdentityManagement;
@@ -29,6 +30,11 @@ public sealed partial class HumanoidProfileSystem : EntitySystem
         ent.Comp.Species = profile.Species;
         ent.Comp.Sex = profile.Sex;
         Dirty(ent);
+
+        // OpenSpace edit start
+        if (TryComp<TTSComponent>(ent, out var tts))
+            tts.VoicePrototypeId = profile.Voice;
+        // OpenSpace edit end
 
         var sexChanged = new SexChangedEvent(ent.Comp.Sex, profile.Sex);
         RaiseLocalEvent(ent, ref sexChanged);

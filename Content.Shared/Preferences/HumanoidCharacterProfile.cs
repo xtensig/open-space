@@ -1,6 +1,7 @@
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Content.Shared._OpenSpace.TTS; // OpenSpace
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
 using Content.Shared.Humanoid;
@@ -73,6 +74,14 @@ namespace Content.Shared.Preferences
         /// </summary>
         [DataField]
         public string FlavorText { get; set; } = string.Empty;
+
+        // OpenSpace edit start
+        /// <summary>
+        /// TTS voice identifier for this character.
+        /// </summary>
+        [DataField]
+        public string Voice { get; set; } = TTSConfig.DefaultVoice;
+        // OpenSpace edit end
 
         /// <summary>
         /// Associated <see cref="SpeciesPrototype"/> for this profile.
@@ -183,7 +192,15 @@ namespace Content.Shared.Preferences
                 new HashSet<ProtoId<TraitPrototype>>(other.TraitPreferences),
                 new Dictionary<string, RoleLoadout>(other.Loadouts))
         {
+            Voice = other.Voice; // OpenSpace
         }
+
+        // OpenSpace edit start
+        public HumanoidCharacterProfile WithVoice(string voice)
+        {
+            return new HumanoidCharacterProfile(this) { Voice = voice };
+        }
+        // OpenSpace edit end
 
         /// <summary>
         ///     Get the default humanoid character profile, using internal constant values.
@@ -474,6 +491,7 @@ namespace Content.Shared.Preferences
             if (!_traitPreferences.SequenceEqual(other._traitPreferences)) return false;
             if (!Loadouts.SequenceEqual(other.Loadouts)) return false;
             if (FlavorText != other.FlavorText) return false;
+            if (Voice != other.Voice) return false; // OpenSpace
             return Appearance.Equals(other.Appearance);
         }
 
@@ -729,6 +747,7 @@ namespace Content.Shared.Preferences
             hashCode.Add(Appearance);
             hashCode.Add((int)SpawnPriority);
             hashCode.Add((int)PreferenceUnavailable);
+            hashCode.Add(Voice); // OpenSpace
             return hashCode.ToHashCode();
         }
 

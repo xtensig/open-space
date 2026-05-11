@@ -19,7 +19,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.VoiceMask;
 
-public sealed partial class VoiceMaskSystem : EntitySystem
+public sealed partial class VoiceMaskSystem : EntitySystem  // OpenSpace
 {
     [Dependency] private SharedUserInterfaceSystem _uiSystem = default!;
     [Dependency] private SharedPopupSystem _popupSystem = default!;
@@ -43,6 +43,7 @@ public sealed partial class VoiceMaskSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+        InitializeTTS(); // OpenSpace
 
         // These events should fire in the order Innate -> Implant -> Inventory
         // Transform speaker name events
@@ -272,7 +273,7 @@ public sealed partial class VoiceMaskSystem : EntitySystem
     private void UpdateUI(Entity<VoiceMaskComponent> entity)
     {
         if (_uiSystem.HasUi(entity, VoiceMaskUIKey.Key))
-            _uiSystem.SetUiState(entity.Owner, VoiceMaskUIKey.Key, new VoiceMaskBuiState(GetCurrentVoiceName(entity), entity.Comp.VoiceMaskSpeechVerb, entity.Comp.Active, entity.Comp.AccentHide, entity.Comp.TitleText));
+            _uiSystem.SetUiState(entity.Owner, VoiceMaskUIKey.Key, new VoiceMaskBuiState(GetCurrentVoiceName(entity), entity.Comp.VoiceMaskSpeechVerb, entity.Comp.Active, entity.Comp.AccentHide, entity.Comp.TitleText, GetEffectiveVoiceId(entity))); // OpenSpace
     }
     #endregion
 

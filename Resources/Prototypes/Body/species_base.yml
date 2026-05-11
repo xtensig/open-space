@@ -32,6 +32,7 @@
     defaultRotation: 90
     horizontalRotation: 90
   - type: HumanoidProfile
+  - type: TTS # OpenSpace
   - type: TypingIndicator
   - type: SlowOnDamage
     speedModifierThresholds:

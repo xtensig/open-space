@@ -7,6 +7,7 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared;
 using Robust.Shared.Configuration;
+using Content.Client._OpenSpace.TTS; // OpenSpace
 
 namespace Content.Client.Options.UI.Tabs;
 
@@ -58,6 +59,25 @@ public sealed partial class AudioTab : Control
             SliderMaxAmbienceSounds,
             _cfg.GetCVar(CCVars.MinMaxAmbientSourcesConfigured),
             _cfg.GetCVar(CCVars.MaxMaxAmbientSourcesConfigured));
+
+        // OpenSpace edit start
+        Control.AddOptionPercentSlider(
+            CCVars.TTSVolume,
+            SliderVolumeTTS,
+            scale: ContentAudioSystem.TtsMultiplier);
+
+        Control.AddOptionPercentSlider(
+            CCVars.TTSRadioVolume,
+            SliderVolumeTTSRadio,
+            scale: ContentAudioSystem.TtsMultiplier);
+
+        Control.AddOptionPercentSlider(
+            CCVars.TTSAnnounceVolume,
+            SliderVolumeTTSAnnounce,
+            scale: ContentAudioSystem.TtsMultiplier);
+
+        Control.AddOptionCheckBox(CCVars.TTSClientEnabled, TTSClientEnabledCheckBox);
+        // OpenSpace edit end
 
         Control.AddOptionCheckBox(CCVars.LobbyMusicEnabled, LobbyMusicCheckBox);
         Control.AddOptionCheckBox(CCVars.RestartSoundsEnabled, RestartSoundsCheckBox);

@@ -81,6 +81,7 @@ namespace Content.Server.Entry
         [Dependency] private ServerInfoManager _serverInfo = default!;
         [Dependency] private ServerUpdateManager _updateManager = default!;
         [Dependency] private ServerFeedbackManager _feedbackManager = null!;
+        [Dependency] private Content.Server._OpenSpace.TTS.TTSManager _ttsManager = default!; // OpenSpace
 
         public override void PreInit()
         {
@@ -137,6 +138,7 @@ namespace Content.Server.Entry
             _watchlistWebhookManager.Initialize();
             _job.Initialize();
             _rateLimit.Initialize();
+            _ttsManager.Initialize(); // OpenSpace
         }
 
         public override void PostInit()

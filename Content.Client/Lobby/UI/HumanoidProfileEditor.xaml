@@ -80,6 +80,14 @@
                                     <Control HorizontalExpand="True"/>
                                     <OptionButton Name="PronounsButton" HorizontalAlignment="Right" />
                                 </BoxContainer>
+                                <!-- OpenSpace edit start -->
+                                <BoxContainer HorizontalExpand="True">
+                                    <Label Text="{Loc 'humanoid-profile-editor-voice-label'}" />
+                                    <Control HorizontalExpand="True"/>
+                                    <OptionButton Name="VoiceButton" HorizontalAlignment="Right" />
+                                    <Button Name="VoicePlayButton" Text="{Loc 'humanoid-profile-editor-voice-play-button'}" HorizontalAlignment="Right" />
+                                </BoxContainer>
+                                <!-- OpenSpace edit end -->
                                 <!-- Show clothing -->
                                 <BoxContainer HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-clothing'}" />

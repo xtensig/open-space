@@ -192,6 +192,7 @@ namespace Content.Client.Lobby.UI
             #endregion Gender
 
             RefreshSpecies();
+            InitializeVoice(); // OpenSpace
 
             SpeciesButton.OnItemSelected += args =>
             {
@@ -383,6 +384,7 @@ namespace Content.Client.Lobby.UI
             RefreshSpecies();
             RefreshTraits();
             RefreshFlavorText();
+            UpdateTTSVoicesControls(); // OpenSpace
             ReloadPreview();
 
             if (Profile != null)

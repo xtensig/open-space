@@ -1,0 +1,9 @@
+ui-options-tts-volume = TTS Volume:
+ui-options-tts-announce-volume = TTS Announcement Volume:
+ui-options-tts-radio-volume = TTS Radio Volume:
+ui-options-tts-client-enabled = Enable TTS
+humanoid-profile-editor-voice-label = Voice:
+humanoid-profile-editor-voice-play-button = ▶
+tts-rate-limited = You are generating TTS too fast!
+voice-mask-tts-voice-label = TTS Voice:
+voice-mask-voice-popup-success = Voice successfully changed.

@@ -36,6 +36,8 @@
   - type: NpcFactionMember
     factions:
     - Dragon
+  - type: TTS # OpenSpace
+    voice: dragon_knight_dragon_dota_2 # OpenSpace
   - type: Speech
     speechVerb: LargeMob
   - type: CombatMode

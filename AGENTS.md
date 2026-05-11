@@ -146,15 +146,17 @@ This repository is a large Space Station 14 fork with a clear split between game
 - Prefer fixing gameplay behavior in content code before assuming an engine change is needed.
 - For fork-only behavior, prefer extending `_OpenSpace` or another clearly fork-scoped area instead of hiding fork logic in unrelated upstream files.
 - When you must touch an upstream content file, keep the diff narrow and preserve surrounding structure and style.
-- When adding or changing OpenSpace-specific code in a file outside any `_OpenSpace` path, wrap each OpenSpace-specific block with edit markers:
+- When adding or changing OpenSpace-specific code in a file outside any `_OpenSpace` path, mark it:
+  - Single added or changed line: append `// OpenSpace` as an inline comment.
+  - Multiple lines: wrap with block markers:
 
 ```csharp
-// open-space edit start
+// OpenSpace edit start
 ...code here...
-// open-space edit end
+// OpenSpace edit end
 ```
 
-- Keep edit-marker ranges as narrow as practical. For files that do not use `//` comments, use the native comment syntax while preserving `open-space edit start` and `open-space edit end`.
+- Keep edit-marker ranges as narrow as practical. For files that do not use `//` comments, use the native comment syntax while preserving `OpenSpace edit start`, `OpenSpace edit end`, and `OpenSpace`.
 
 ## Assembly Placement
 

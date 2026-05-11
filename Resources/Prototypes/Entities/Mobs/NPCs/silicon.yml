@@ -39,6 +39,8 @@
       Alive: BorgHealth
       Dead: BorgDead
     showOverlays: false
+  - type: TTS # OpenSpace
+    voice: fact_core # OpenSpace
   - type: Speech
     speechVerb: Robotic
     speechSounds: Borg

@@ -108,6 +108,8 @@
     hungerPerArmyUse: 25
     hungerPerDomainUse: 50
   - type: MobsterAccent
+  - type: TTS # OpenSpace
+    voice: planya # OpenSpace
   - type: Speech
     speechVerb: SmallMob
   - type: Butcherable

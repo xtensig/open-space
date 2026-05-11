@@ -12,24 +12,26 @@ Use this file when deciding where and how to implement a change in a fork.
 - Keep diffs narrow inside upstream files.
 - Preserve existing ordering, spacing, and local style in touched files.
 - When creating fork-only behavior, prefer `_OpenSpace` paths that mirror the upstream feature layout.
-- When adding or changing OpenSpace-specific code in a file outside any `_OpenSpace` path, wrap each OpenSpace-specific block with edit markers:
+- When adding or changing OpenSpace-specific code in a file outside any `_OpenSpace` path, mark it:
+  - Single added or changed line: append `// OpenSpace-Edit` as an inline comment.
+  - Multiple lines: wrap with block markers:
 
 ```csharp
-// open-space edit start
+// OpenSpace Edit Start
 ...code here...
-// open-space edit end
+// OpenSpace Edit End
 ```
 
 - Keep edit-marker ranges as narrow as practical. Do not wrap unrelated upstream code or whole files when only a small block belongs to OpenSpace.
 - Multiple marked blocks in one file are allowed when the OpenSpace changes are separated by upstream code.
-- For files that do not use `//` comments, use the native comment syntax while preserving `open-space edit start` and `open-space edit end`.
+- For files that do not use `//` comments, use the native comment syntax while preserving `OpenSpace Edit Start`, `OpenSpace Edit End`, and `OpenSpace-Edit`.
 - Prefer reusable hooks, helpers, and data-driven content over one-off special cases or hardcoded values.
 
 ## Good Patterns
 
 - Add fork-specific systems or resources beside the upstream feature in `_OpenSpace`.
 - Extend an existing public system API instead of rewriting the whole feature.
-- Mark narrow OpenSpace-specific edits in inherited files with paired `open-space edit` comments.
+- Mark narrow OpenSpace-specific edits in inherited files with paired `OpenSpace-Edit` comments.
 - Add only the fields, prototypes, and locale entries required for the task.
 - Move repeated or feature-configurable behavior into reusable APIs, component data, or prototypes.
 

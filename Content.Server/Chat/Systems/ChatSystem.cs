@@ -8,6 +8,7 @@ using Content.Server.GameTicking;
 using Content.Server.Speech.EntitySystems;
 using Content.Server.Speech.Prototypes;
 using Content.Server.Station.Systems;
+using Content.Shared._OpenSpace.TTS; // OpenSpace
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
@@ -307,6 +308,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             _audio.PlayGlobal(announcementSound ?? DefaultAnnouncementSound, Filter.Broadcast(), true, AudioParams.Default.WithVolume(-2f));
         }
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Global station announcement from {sender}: {message}");
+        RaiseLocalEvent(new TTSAnnouncementEvent(message, Filter.Broadcast())); // OpenSpace
     }
 
     /// <inheritdoc />
@@ -328,6 +330,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             _audio.PlayGlobal(announcementSound ?? DefaultAnnouncementSound, filter, true, AudioParams.Default.WithVolume(-2f));
         }
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Station Announcement from {sender}: {message}");
+        RaiseLocalEvent(new TTSAnnouncementEvent(message, filter)); // OpenSpace
     }
 
     /// <inheritdoc />
@@ -362,6 +365,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         }
 
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Station Announcement on {station} from {sender}: {message}");
+        RaiseLocalEvent(new TTSAnnouncementEvent(message, filter)); // OpenSpace
     }
 
     #endregion

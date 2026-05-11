@@ -1,3 +1,4 @@
+using Content.Shared._OpenSpace.TTS; // OpenSpace
 using Content.Shared.Chat;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Radio;
@@ -110,6 +111,15 @@ public sealed partial class HeadsetSystem : SharedHeadsetSystem
         }
 
         if (TryComp(parent, out ActorComponent? actor))
+        {
+            // OpenSpace edit start
+            if (args.Voice is not null)
+            {
+                var ttsEv = new TTSRadioPlayEvent(args.Message, args.Voice, GetNetEntity(uid), GetNetEntity(args.MessageSource));
+                RaiseLocalEvent(parent, ttsEv);
+            }
+            // OpenSpace edit end
             _netMan.ServerSendMessage(args.ChatMsg, actor.PlayerSession.Channel);
+        }
     }
 }

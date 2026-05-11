@@ -72,6 +72,7 @@ internal static class ServerContentIoC
         deps.Register<ServerApi>();
         deps.Register<JobWhitelistManager>();
         deps.Register<PlayerRateLimitManager>();
+        deps.Register<Content.Server._OpenSpace.TTS.TTSManager>(); // OpenSpace
         deps.Register<SharedPlayerRateLimitManager, PlayerRateLimitManager>();
         deps.Register<MappingManager>();
         deps.Register<IWatchlistWebhookManager, WatchlistWebhookManager>();
