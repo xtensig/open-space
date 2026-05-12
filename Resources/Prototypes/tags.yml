@@ -1023,9 +1023,6 @@
   id: Ointment # Storage whitelist: ClothingBeltMedical
 
 - type: Tag
-  id: OpenSpaceStorageBlacklist
-
-- type: Tag
   id: Ore # Storage whitelist: OreBag, OreBox. MaterialStorage whitelist: OreProcessor
 
 - type: Tag

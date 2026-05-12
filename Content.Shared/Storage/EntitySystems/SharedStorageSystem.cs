@@ -84,7 +84,6 @@ public abstract partial class SharedStorageSystem : EntitySystem
     public bool NestedStorage = true;
 
     public static readonly ProtoId<ItemSizePrototype> DefaultStorageMaxItemSize = "Normal";
-    private static readonly ProtoId<TagPrototype> OpenSpaceStorageBlacklistTag = "OpenSpaceStorageBlacklist";
 
     public const float AreaInsertDelayPerItem = 0.075f;
     private static AudioParams _audioParams = AudioParams.Default
@@ -204,10 +203,6 @@ public abstract partial class SharedStorageSystem : EntitySystem
 
     private void OnRemove(Entity<StorageComponent> entity, ref ComponentRemove args)
     {
-        // OpenSpace tweak start
-        var coordinates = TransformSystem.GetMoverCoordinates(entity);
-        ContainerSystem.EmptyContainer(entity.Comp.Container, destination: coordinates);
-        // OpenSpace tweak end
         UI.CloseUi(entity.Owner, StorageComponent.StorageUiKey.Key);
     }
 
@@ -464,8 +459,7 @@ public abstract partial class SharedStorageSystem : EntitySystem
 
     public virtual void UpdateUI(Entity<StorageComponent?> entity) {}
 
-    // OpenSpace-Tweak: private -> protected for inheritance, for ChemMaster bottle filling.
-    protected virtual void AddTransferVerbs(EntityUid uid, StorageComponent component, GetVerbsEvent<UtilityVerb> args)
+    private void AddTransferVerbs(EntityUid uid, StorageComponent component, GetVerbsEvent<UtilityVerb> args)
     {
         if (!args.CanAccess || !args.CanInteract)
             return;
@@ -1060,8 +1054,7 @@ public abstract partial class SharedStorageSystem : EntitySystem
         }
 
         if (_whitelistSystem.IsWhitelistFail(storageComp.Whitelist, insertEnt) ||
-            _whitelistSystem.IsWhitelistPass(storageComp.Blacklist, insertEnt) ||
-            _tag.HasTag(insertEnt, OpenSpaceStorageBlacklistTag))  // OpenSpace tweak
+            _whitelistSystem.IsWhitelistPass(storageComp.Blacklist, insertEnt))
         {
             reason = "comp-storage-invalid-container";
             return false;

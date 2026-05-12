@@ -15,14 +15,6 @@
   result: Scalpel
 
 - type: latheRecipe
-  id: BoxBottle
-  result: BoxBottle
-  completetime: 2
-  materials:
-    Glass: 50
-    Plastic: 300
-
-- type: latheRecipe
   parent: BaseSurgicalRecipe
   id: Retractor
   result: Retractor
