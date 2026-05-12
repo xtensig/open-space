@@ -590,6 +590,41 @@ namespace Content.Server.Database
                 player.LastSeenHWId);
         }
 
+        // OpenSpace Edit Start
+        public async Task<string?> GetPlayerDiscordIdAsync(NetUserId userId, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            var record = await db.DbContext.OpenSpacePlayer
+                .SingleOrDefaultAsync(p => p.UserId == userId.UserId, cancel);
+            return record?.DiscordId;
+        }
+
+        public async Task SetPlayerDiscordIdAsync(NetUserId userId, string discordId)
+        {
+            await using var db = await GetDb();
+
+            var updated = await db.DbContext.OpenSpacePlayer
+                .Where(p => p.UserId == userId.UserId)
+                .ExecuteUpdateAsync(s => s.SetProperty(p => p.DiscordId, discordId));
+
+            if (updated != 0)
+                return;
+
+            try
+            {
+                db.DbContext.OpenSpacePlayer.Add(new OpenSpacePlayer { UserId = userId.UserId, DiscordId = discordId });
+                await db.DbContext.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                // Concurrent insert won the race — row exists, update it.
+                await db.DbContext.OpenSpacePlayer
+                    .Where(p => p.UserId == userId.UserId)
+                    .ExecuteUpdateAsync(s => s.SetProperty(p => p.DiscordId, discordId));
+            }
+        }
+        // OpenSpace Edit End
+
         #endregion
 
         #region Connection Logs

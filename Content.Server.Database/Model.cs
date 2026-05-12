@@ -49,6 +49,7 @@ namespace Content.Server.Database
         public DbSet<RoleWhitelist> RoleWhitelists { get; set; } = null!;
         public DbSet<BanTemplate> BanTemplate { get; set; } = null!;
         public DbSet<IPIntelCache> IPIntelCache { get; set; } = null!;
+        public DbSet<OpenSpacePlayer> OpenSpacePlayer { get; set; } = null!; // OpenSpace-Edit
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -1054,4 +1055,14 @@ namespace Content.Server.Database
         /// </summary>
         public float Score { get; set; }
     }
+
+    // OpenSpace Edit Start
+    [Table("open_space_player")]
+    public class OpenSpacePlayer
+    {
+        [Key]
+        public Guid UserId { get; set; }
+        public string? DiscordId { get; set; }
+    }
+    // OpenSpace Edit End
 }

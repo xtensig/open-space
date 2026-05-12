@@ -160,6 +160,10 @@ namespace Content.Server.Database
             ImmutableTypedHwid? hwId);
         Task<PlayerRecord?> GetPlayerRecordByUserName(string userName, CancellationToken cancel = default);
         Task<PlayerRecord?> GetPlayerRecordByUserId(NetUserId userId, CancellationToken cancel = default);
+        // OpenSpace Edit Start
+        Task<string?> GetPlayerDiscordIdAsync(NetUserId userId, CancellationToken cancel = default);
+        Task SetPlayerDiscordIdAsync(NetUserId userId, string discordId);
+        // OpenSpace Edit End
         #endregion
 
         #region Connection Logs
@@ -585,6 +589,20 @@ namespace Content.Server.Database
             DbReadOpsMetric.Inc();
             return RunDbCommand(() => _db.GetPlayerRecordByUserId(userId, cancel));
         }
+
+        // OpenSpace Edit Start
+        public Task<string?> GetPlayerDiscordIdAsync(NetUserId userId, CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetPlayerDiscordIdAsync(userId, cancel));
+        }
+
+        public Task SetPlayerDiscordIdAsync(NetUserId userId, string discordId)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SetPlayerDiscordIdAsync(userId, discordId));
+        }
+        // OpenSpace Edit End
 
         public Task<int> AddConnectionLogAsync(
             NetUserId userId,

@@ -390,6 +390,8 @@ namespace Content.Server.GameTicking
             if (!_userDb.IsLoadComplete(player))
                 return;
 
+            if (TryBlockTypeAuth(player)) return; // OpenSpace-Edit
+
             SpawnPlayer(player, station, jobId, silent: silent);
         }
 
@@ -401,6 +403,8 @@ namespace Content.Server.GameTicking
             // Can't spawn players with a dummy ticker!
             if (DummyTicker)
                 return;
+
+            if (TryBlockTypeAuth(player)) return; // OpenSpace-Edit
 
             PlayerJoinGame(player);
             SpawnObserver(player);

@@ -21,7 +21,7 @@ namespace Content.Server.Database.Migrations.Postgres
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.0")
+                .HasAnnotation("ProductVersion", "10.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -912,6 +912,23 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasFilter("priority = 3");
 
                     b.ToTable("job", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.OpenSpacePlayer", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id");
+
+                    b.Property<string>("DiscordId")
+                        .HasColumnType("text")
+                        .HasColumnName("discord_id");
+
+                    b.HasKey("UserId")
+                        .HasName("PK_open_space_player");
+
+                    b.ToTable("open_space_player", (string)null);
                 });
 
             modelBuilder.Entity("Content.Server.Database.PlayTime", b =>
