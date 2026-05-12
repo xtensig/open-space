@@ -75,3 +75,14 @@ Entries:
   id: 10
   time: '2026-05-11T21:08:12.000000+00:00'
   url: https://github.com/ss14-art/open-space/pull/57
+- author: SunChan
+  changes:
+  - type: Add
+    message: Изменён пользовательский UI для хим. мастера.
+  - type: Tweak
+    message: Добавлена русская локализация для UI хим. мастера.
+  - type: Tweak
+    message: Английская локализация подтянула изменения.
+  id: 11
+  time: '2026-05-12T21:17:41.000000+00:00'
+  url: https://github.com/ss14-art/open-space/pull/56
