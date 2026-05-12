@@ -25,6 +25,7 @@
   recipes:
   - Jug
   - ChemistryEmptyBottle01
+  - BoxBottle
   - ClothingEyesGlassesChemical
 
 - type: latheRecipePack

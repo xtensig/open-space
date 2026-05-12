@@ -26,6 +26,9 @@
           - FitsInDispenser
   - type: ChemMaster
     pillDosageLimit: 20
+    bottleDosageLimit: 30
+    maxPills: 30
+    maxBottles: 20
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -89,9 +92,9 @@
         whitelist:
           tags:
           - Bottle
-          - PillCanister
-  - type: Solution # Chemmaster is special in how it interacts with reagents. For now.
-    id: buffer
+  - type: SolutionContainerManager
+    solutions:
+      buffer: {}
   - type: DumpableSolution
     solution: buffer
     unlimited: true
