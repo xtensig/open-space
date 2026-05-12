@@ -86,3 +86,10 @@ Entries:
   id: 11
   time: '2026-05-12T21:17:41.000000+00:00'
   url: https://github.com/ss14-art/open-space/pull/56
+- author: Soragy
+  changes:
+  - type: Add
+    message: Добавлена авторизация через Discord.
+  id: 12
+  time: '2026-05-12T22:31:58.000000+00:00'
+  url: https://github.com/ss14-art/open-space/pull/59
